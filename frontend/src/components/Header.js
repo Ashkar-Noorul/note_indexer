@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
+
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,16 +36,22 @@ const Header = () => {
             </Form>
           </Nav>
           <Nav>
-            <Nav.Link href="/mynotes">
-              <Link to="mynotes">My Notes</Link>
-            </Nav.Link>
-            <NavDropdown title="Noorul Ashkar" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item onClick={logoutHandler}>
-                Logout
-              </NavDropdown.Item>
-            </NavDropdown>
+            {userInfo ? (
+              <>
+                <Nav.Link href="/mynotes">My Notes</Nav.Link>
+                <NavDropdown title={userInfo?.name} id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/profile">
+                    My Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
+            ) : (
+              <Nav.Link href="/login">Login</Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

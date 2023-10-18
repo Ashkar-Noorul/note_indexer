@@ -4,7 +4,6 @@ import MainScreen from "../../components/MainScreen";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./LoginPage.css";
-import axios from "axios";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +22,7 @@ const LoginPage = ({ history }) => {
     if (userInfo) {
       navigate("/mynotes");
     }
-  });
+  }, [navigate, userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();

@@ -47,7 +47,7 @@ const UpdateNote = asyncHandler(async (req, res) => {
 
   const note = await Note.findById(req.params.id);
 
-  if (note.user.toString() != req.user._id.toString()) {
+  if (note.user.toString() !== req.user._id.toString()) {
     res.status(401);
     throw new Error("you are not authorized to perform this action");
   }
