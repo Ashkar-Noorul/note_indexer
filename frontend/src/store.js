@@ -7,6 +7,7 @@ import {
 } from "./reducers/userReducers";
 import {
   noteCreateReducer,
+  noteDeleteReducer,
   noteListReducer,
   noteUpdateReducer,
 } from "./reducers/notesReducers";
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   noteCreate: noteCreateReducer,
   noteUpdate: noteUpdateReducer,
   userUpdate: userUpdateReducer,
+  noteDelete: noteDeleteReducer,
 });
 
 const persistConfig = {

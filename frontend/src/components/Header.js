@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 
-const Header = () => {
+const Header = ({ setSearch }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,6 +32,7 @@ const Header = () => {
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
+                onChange={(e) => setSearch(e.target.value)}
               />
             </Form>
           </Nav>

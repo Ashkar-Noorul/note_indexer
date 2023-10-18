@@ -3,7 +3,7 @@ import MainScreen from "../../components/MainScreen";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { updateNoteAction } from "../../actions/notesActions";
+import { deleteNoteAction, updateNoteAction } from "../../actions/notesActions";
 import { Button, Card, Form } from "react-bootstrap";
 import ErrorMessage from "../../components/ErrorMessage";
 import ReactMarkdown from "react-markdown";
@@ -22,9 +22,12 @@ const UpdateNote = () => {
   const noteUpdate = useSelector((state) => state.noteUpdate);
   const { loading, error } = noteUpdate;
 
+  const noteDelete = useSelector((state) => state.noteDelete);
+  const { loading: loadingDelete, error: errorDelete } = noteDelete;
+
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure?")) {
-      dispatch();
+      dispatch(deleteNoteAction(id));
     }
     navigate("/mynotes");
   };
@@ -62,11 +65,11 @@ const UpdateNote = () => {
         <Card.Header>Edit your Note</Card.Header>
         <Card.Body>
           <Form onSubmit={updateHandler}>
-            {/* {loadingDelete && <Loading />} */}
+            {loadingDelete && <Loading />}
             {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-            {/* {errorDelete && (
+            {errorDelete && (
               <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
-            )} */}
+            )}
             <Form.Group className="mb-3" controlId="title">
               <Form.Label>Title</Form.Label>
               <Form.Control
